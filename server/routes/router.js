@@ -4,7 +4,7 @@ const Course = require("../models/Course");
 const router = Router();
 
 // get all courses
-router.get("/", async (req,res,next) => {
+router.get("/courses", async (req,res,next) => {
 	try {
 		const courses = await Course.find();
 		return res.status(200).send(courses);

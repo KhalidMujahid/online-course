@@ -1,12 +1,14 @@
 import { useState } from "react";
 
 import { Button, Form, FormControl } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { createUser } from "../redux/user";
+// import { createUser } from "../redux/user";
+import { useCreateUserMutation } from "../services/user";
 
 function Register() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [ createUser ] = useCreateUserMutation();
   const navigate = useNavigate();
   const [input, setInput] = useState({
     fname: "",
@@ -21,11 +23,29 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
+    // console.log(input);
 
-    dispatch(createUser(input));
+    try {
+      createUser({
+        fname: input.fname,
+        lname: input.lname,
+        email: input.email,
+        password: input.password,
+      })
+        .then((res) => {
+          if (res.data) {
+            navigate("/");
+          } else {
+            alert("All input are required!");
+            return;
+          }
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      console.error("An error occured please try again later");
+      return;
+    }
 
-    navigate("/");
     setInput({ fname: "", lname: "", email: "", password: "" });
   }
 

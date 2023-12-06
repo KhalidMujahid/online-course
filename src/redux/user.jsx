@@ -5,18 +5,11 @@ const userReducer = createSlice({
   initialState: {
     isLoggedIn: false,
     users: [{ email: "test@test.com", password: "1", courses: [] }],
-    user: { email: "test@test.com", password: "1", courses: [] },
+    user: {},
   },
   reducers: {
     loginUser: (state, { payload }) => {
-      console.log("login Payload", payload);
-      const user = state.users.find((user) => user.email === payload.email);
-
-      if (user.password) {
-        return { ...state, isLoggedIn: true, user: { ...payload } };
-      } else {
-        alert("Invalid email or password!");
-      }
+      return { ...state, isLoggedIn: true, user: { ...payload } };
     },
     createUser: (state, { payload }) => {
       console.log("Create accoiunt Payload", payload);

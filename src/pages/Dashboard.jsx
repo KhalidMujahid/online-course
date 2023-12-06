@@ -3,24 +3,23 @@ import NavBar from "../components/Navbar";
 import avater from "../assets/avater.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { addCourse } from "../redux/user";
+import { useGetCoursesQuery } from "../services/course";
 
 function Dashboard() {
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.courses);
   const { user } = useSelector((state) => state.users);
-
-  console.log(user);
+  const { data: courses } = useGetCoursesQuery();
 
   return (
     <>
       <NavBar />
       <Container>
         <CardGroup className="gap-2">
-          {courses.map((course) => (
-            <Card key={course.id}>
+          {courses?.map((course) => (
+            <Card key={course?.id}>
               <Card.Img variant="top" src={avater} />
               <Card.Body>
-                <Card.Title>{course.title}</Card.Title>
+                <Card.Title>{course?.title}</Card.Title>
                 <Card.Text>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
                   corrupti itaque tempore aliquam illo cumque est error tempora,
@@ -40,7 +39,7 @@ function Dashboard() {
                   className="border-0"
                   style={{ backgroundColor: "orange" }}
                   onClick={() =>
-                    dispatch(addCourse({ email: user.email, courses: course }))
+                    dispatch(addCourse({ email: user?.email, courses: course }))
                   }
                 >
                   Enroll
