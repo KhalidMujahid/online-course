@@ -1,13 +1,14 @@
 import { useState } from "react";
-
 import { Button, Form, FormControl } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../redux/user";
+//import { loginUser } from "../redux/user";
+import { useLoginUserMutation } from "../services/user";
 
 function Login() {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [ loginUser ] = useLoginUserMutation();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -19,11 +20,25 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
 
-    dispatch(loginUser(input));
-
-    navigate("/dashboard");
+    try {
+      loginUser({
+        email: input.email,
+        password: input.password,
+      })
+        .then((res) => {
+          if (res.data) {
+            navigate("/");
+          } else {
+            alert("Invalid Email or password");
+            return;
+          }
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      console.error("An error occured please try again later");
+      return;
+    }
 
     setInput({ email: "", password: "" });
   }

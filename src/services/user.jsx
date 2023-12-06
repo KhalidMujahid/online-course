@@ -6,7 +6,14 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     loginUser: builder.mutation({
       query: (data) => ({
-        url: "/login",
+        url: "/api/login",
+        body: data,
+        method: "POST",
+      }),
+    }),
+    createUser: builder.mutation({
+      query: (data) => ({
+        url: "/api/register",
         body: data,
         method: "POST",
       }),
@@ -14,4 +21,4 @@ export const userApi = createApi({
   }),
 });
 
-export const { useLoginUserMutation } = userApi;
+export const { useLoginUserMutation,useCreateUserMutation } = userApi;
