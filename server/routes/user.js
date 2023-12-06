@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const User = require("../models/User");
+const Course = require("../models/Course");
 
 
 const userRouter = Router();
@@ -50,6 +51,36 @@ userRouter.post("/register",async (req,res,next) => {
 			return res.status(201).send({ message: "Account created!" });
 		} else {
 			return res.status(400).send({ message: "An error occured while creating account please try again later"});
+		}
+
+	} catch(error){
+		next(error);
+	}
+});
+
+// add course for user
+userRouter.put("/add/course", async (req,res,next) => {
+	try {
+		const { userId,courseId } = req.body;
+
+		// find user
+		const user = await User.findById(userId);
+
+		// if user
+		if(user){
+			// find course
+			const course = await Course.findById(courseId);
+			if(course){
+				await User.findByIdAndUpdate(userId,{
+					$push: { courses: course }
+				},{ new:true })
+				.then((d) => res.status(201).send(d))
+				.catch(error => res.status(400).send(error));
+			} else {
+				return res.sendStatus(404);
+			}
+		} else {
+			return res.sendStatus(404);
 		}
 
 	} catch(error){

@@ -6,6 +6,10 @@ import { useSelector } from "react-redux";
 function Profile() {
   const { user } = useSelector((state) => state.users);
 
+  function removeCourse(id){
+    console.log(id);
+  }
+
   return (
     <div>
       <NavBar />
@@ -13,7 +17,7 @@ function Profile() {
         <h1>My courses</h1>
         <CardGroup className="gap-2">
           {user?.courses.map((course) => (
-            <Card key={course.id}>
+            <Card key={course._id}>
               <Card.Img variant="top" src={avater} />
               <Card.Body>
                 <Card.Title>{course.title}</Card.Title>
@@ -27,6 +31,13 @@ function Profile() {
                   style={{ backgroundColor: "orange" }}
                 >
                   View course
+                </Button>
+                <Button
+                  onClick={() => removeCourse(course._id)}
+                  className="border-0"
+                  style={{ backgroundColor: "red" }}
+                >
+                  Remove course
                 </Button>
               </Card.Body>
               <Card.Footer>

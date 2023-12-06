@@ -43,4 +43,35 @@ router.get("/course/:id", async (req,res,next) => {
 	}
 });
 
+// migraions
+router.get("/pop",async (req,res,next) => {
+	const done = await Course.insertMany([
+    {
+      title: "React",
+      descriptions: "React course",
+      price: 200,
+      vidLink: "",
+    },
+    {
+      title: "Angular",
+      descriptions: "Angular course",
+      price: 20,
+      vidLink: "",
+    },
+    {
+      title: "Vue",
+      descriptions: "Vue course",
+      price: 209,
+      vidLink: "",
+    },
+    {
+      title: "JavaScript",
+      descriptions: "JavaScript course",
+      price: 500,
+      vidLink: "",
+    },
+ ]);
+	console.log(done);
+});
+
 module.exports = router;

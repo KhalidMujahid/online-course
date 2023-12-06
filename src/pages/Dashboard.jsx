@@ -2,13 +2,30 @@ import { Button, Card, CardGroup, Container } from "react-bootstrap";
 import NavBar from "../components/Navbar";
 import avater from "../assets/avater.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { addCourse } from "../redux/user";
-import { useGetCoursesQuery } from "../services/course";
+// import { addCourse } from "../redux/user";
+import { useGetCoursesQuery,useUpdateCourseMutation } from "../services/course";
 
 function Dashboard() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { user } = useSelector((state) => state.users);
   const { data: courses } = useGetCoursesQuery();
+  const [ updateCourse ] = useUpdateCourseMutation();
+
+  function addCourse(val){
+    try{
+      updateCourse({ userId: user._id, courseId: val})
+        .then((res) => {
+          if(res.data){
+            alert("Course added!")
+          } else {
+            alert("An error occured!");
+          }
+        })
+        .catch(error => console.error(error))
+    } catch(e){
+      console.error(e);
+    }
+  }
 
   return (
     <>
@@ -16,7 +33,7 @@ function Dashboard() {
       <Container>
         <CardGroup className="gap-2">
           {courses?.map((course) => (
-            <Card key={course?.id}>
+            <Card key={course?._id}>
               <Card.Img variant="top" src={avater} />
               <Card.Body>
                 <Card.Title>{course?.title}</Card.Title>
@@ -39,7 +56,7 @@ function Dashboard() {
                   className="border-0"
                   style={{ backgroundColor: "orange" }}
                   onClick={() =>
-                    dispatch(addCourse({ email: user?.email, courses: course }))
+                    addCourse(course._id)
                   }
                 >
                   Enroll
