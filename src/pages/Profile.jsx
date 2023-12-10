@@ -50,7 +50,7 @@ function Profile() {
                   corrupti itaque tempore aliquam illo cumque est error tempora,
                   quos ut nesciunt inventore odit suscipit sed quae mollitia hic
                 </Card.Text>
-                <div className="d-flex justify-content-center align-items-center">
+                <div className="d-flex justify-content-between align-items-center">
                   <Button
                   className="border-0"
                   style={{ backgroundColor: "orange" }}
