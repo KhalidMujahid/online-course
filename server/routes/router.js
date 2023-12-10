@@ -53,7 +53,7 @@ router.get("/pop", async (req, res, next) => {
       price: 200,
       author: "Khalid",
       authorAvater: "http://127.0.0.1:3000/avater.jpg",
-      vidLink: "",
+      vidLink: "http://127.0.0.1:3000/vid.mp4",
     },
     {
       title: "Angular",
@@ -61,7 +61,7 @@ router.get("/pop", async (req, res, next) => {
       price: 20,
       author: "Khalid",
       authorAvater: "http://127.0.0.1:3000/avater.jpg",
-      vidLink: "",
+      vidLink: "http://127.0.0.1:3000/vid.mp4",
     },
     {
       title: "Vue",
@@ -69,7 +69,7 @@ router.get("/pop", async (req, res, next) => {
       price: 209,
       author: "Khalid",
       authorAvater: "http://127.0.0.1:3000/avater.jpg",
-      vidLink: "",
+      vidLink: "http://127.0.0.1:3000/vid.mp4",
     },
     {
       title: "JavaScript",
@@ -77,7 +77,7 @@ router.get("/pop", async (req, res, next) => {
       price: 500,
       author: "Khalid",
       authorAvater: "http://127.0.0.1:3000/avater.jpg",
-      vidLink: "",
+      vidLink: "http://127.0.0.1:3000/vid.mp4",
     },
   ]);
   console.log(done);

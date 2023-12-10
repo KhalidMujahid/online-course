@@ -40,8 +40,8 @@ function Profile() {
       <Container>
         <h1>My courses</h1>
         <CardGroup className="gap-2">
-          {user?.courses.map((course) => (
-            <Card key={course._id}>
+          {user?.courses.map((course,id) => (
+            <Card key={id}>
               <Card.Img variant="top" src={avater} />
               <Card.Body>
                 <Card.Title>{course.title}</Card.Title>

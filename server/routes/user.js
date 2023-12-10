@@ -72,7 +72,7 @@ userRouter.put("/add/course", async (req,res,next) => {
 			const course = await Course.findById(courseId);
 			if(course){
 				await User.findByIdAndUpdate(userId,{
-					$push: { courses: course }
+					$push: { courses: { ...course }}
 				},{ new:true })
 				.then((d) => res.status(201).send(d))
 				.catch(error => res.status(400).send(error));

@@ -28,20 +28,20 @@ function NavBar() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link>
+                <Nav>
                   <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
                     Home
                   </Link>
-                </Nav.Link>
+                </Nav>
 
-                <Nav.Link>
+                <Nav>
                   <Link to={"/profile"} style={{ textDecoration: "none" }}>
                     Profile
                   </Link>
-                </Nav.Link>
-                <Nav.Link>
+                </Nav>
+                <Nav>
                   <FaPowerOff />
-                </Nav.Link>
+                </Nav>
               </Nav>
               <Form className="d-flex">
                 <Form.Control

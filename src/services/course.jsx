@@ -11,6 +11,7 @@ export const courseApi = createApi({
     }),
     getSingleCourse: builder.query({
       query: (id) => `/api/courses/${id}`,
+      rovidesTags: [{ type: "Course" }],
     }),
     // /add/course/:id
     updateCourse: builder.mutation({
