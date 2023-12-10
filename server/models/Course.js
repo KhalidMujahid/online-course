@@ -14,11 +14,13 @@ const mongoose = require("mongoose");
 // });
 
 const CourseSchema = new mongoose.Schema({
-	title: { type: String, trim: true },
-	descriptions: { type: String, trim: true },
-	price: { type: Number },
-	vidLink: { type: String }
-})
+  title: { type: String, trim: true },
+  descriptions: { type: String, trim: true },
+  price: { type: Number },
+  author: { type: String, trim: true },
+  authorAvater: { type: String, default: "avater.png" },
+  vidLink: { type: String },
+});
 
 const Course = mongoose.model("Course", CourseSchema);
 

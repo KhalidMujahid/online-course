@@ -88,5 +88,20 @@ userRouter.put("/add/course", async (req,res,next) => {
 	}
 });
 
+// delete course by user ID
+userRouter.delete("/remove/course/", async (req, res, next) => {
+  try {
+    const { id,courseId } = req.body;
+    const course = await Course.findByIdAndDelete(id,{
+      $pop: {
+        course: courseId
+      }
+    }, { new:true });
+    return res.status(200).send(course);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 module.exports = userRouter;

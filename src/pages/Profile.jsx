@@ -2,12 +2,36 @@ import { Button, Card, CardGroup, Container } from "react-bootstrap";
 import NavBar from "../components/Navbar";
 import avater from "../assets/avater.jpg";
 import { useSelector } from "react-redux";
+import { useDeleteCourseMutation } from "../services/course";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const { user } = useSelector((state) => state.users);
+  const [ deleteCourse ] = useDeleteCourseMutation();
+  const navigate = useNavigate();
 
   function removeCourse(id){
     console.log(id);
+
+    try {
+      deleteCourse({
+        courseId: id,
+        id: user?._id,
+      })
+      .then((res) => {
+        if (res.data) {
+            alert("Course removed");
+          } else {
+            alert("An error occured please try again later");
+            return;
+          }
+      })
+      .catch(error => console.error(error))
+    } catch(error){
+      console.error("An error occured please try again later");
+      return;
+    }
+
   }
 
   return (
@@ -26,9 +50,11 @@ function Profile() {
                   corrupti itaque tempore aliquam illo cumque est error tempora,
                   quos ut nesciunt inventore odit suscipit sed quae mollitia hic
                 </Card.Text>
-                <Button
+                <div className="d-flex justify-content-center align-items-center">
+                  <Button
                   className="border-0"
                   style={{ backgroundColor: "orange" }}
+                  onClick={() => navigate(`/course/${course._id}`)}
                 >
                   View course
                 </Button>
@@ -39,10 +65,8 @@ function Profile() {
                 >
                   Remove course
                 </Button>
+                </div>
               </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </Card.Footer>
             </Card>
           ))}
         </CardGroup>

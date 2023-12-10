@@ -4,6 +4,8 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import View from "./pages/Vew";
+import Course from "./pages/Course";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
 
       <Route element={<ProtectedRoute />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/view/:id" element={<View />} />
+        <Route path="/course/:id" element={<Course />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>
 
